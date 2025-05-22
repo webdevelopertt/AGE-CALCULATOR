@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AGE CALCULATOR </title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+background-color: cyan;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    input[type="date"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>AGE CALCULATOR</h2>
+    <input type="date" id="birthdate">
+    <button onclick="calculateAge()">CALCUKATE YOUR AGE</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculateAge() {
+      const input = document.getElementById("birthdate").value;
+      const result = document.getElementById("result");
+
+      if (!input) {
+        result.textContent = "Please select your birthdate.";
+        return;
+      }
+
+      const birthDate = new Date(input);
+      const today = new Date();
+
+      let years = today.getFullYear() - birthDate.getFullYear();
+      let months = today.getMonth() - birthDate.getMonth();
+      let days = today.getDate() - birthDate.getDate();
+
+      if (days < 0) {
+        months--;
+        const previousMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+        days += previousMonth.getDate();
+      }
+
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      result.textContent = `Your age is ${years} year(s), ${months} month(s), and ${days} day(s).`;
+    }
+  </script>
+<footer style="background-color:#222; color:#fff; text-align:center; padding:15px 0; position:fixed; bottom:0; width:100%;">
+  &copy; 2025 Tauhid.in All rights reserved.
+</footer>
+</body>
+</html>
